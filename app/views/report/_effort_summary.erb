@@ -1,0 +1,31 @@
+
+<div style="height: 70px; width: 392px;margin-left: auto; margin-right: auto">
+  <div class="effort_summary_header">Summary of Hours per Effort</div>
+</div>
+<div>
+  <div class="scroll_mouseover" id="scroll_mouseover_<%=project_id%>" onmouseover="$('scroller_<%=project_id%>').style.visibility='visible';" onmouseout="$('scroller_<%=project_id%>').style.visibility='hidden';">
+    <div class="scroller" id="scroller_<%=project_id%>">
+      <div class="up_arrow" id="up_arrow_<%=project_id%>" onclick="scrollUp( 'effort_summary_box_<%=project_id%>' )"></div>
+      <div class="down_arrow" id="down_arrow_<%=project_id%>" onclick="scrollDown( 'effort_summary_box_<%=project_id%>' )"></div>
+    </div>
+  </div>
+  <script>
+    scrollSlider( '<%=project_id%>' );
+  </script>
+</div>
+
+  
+<div id="effort_summary_box_<%=project_id%>" style="overflow-y:hidden;height:330px;float:none;position:relative">
+  <%
+    counter = 1
+    report_data.each do |data_item|
+  %>
+    <div class="effort_summary_row <%=counter == 1 ? "effort_summary_row_top" : "" %>">
+      <div class="effort_summary_name"><%= data_item[:taginfos].join('/') %></div>
+      <div class="effort_summary_time"><%= data_item[:total_minutes] / 60 %>h<%= (data_item[:total_minutes] % 60) > 0 ? " #{(data_item[:total_minutes] % 60)}m" : "" %></div>
+    </div>
+  <%
+    counter += 1
+    end
+  %>
+</div>

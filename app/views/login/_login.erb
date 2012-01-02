@@ -1,0 +1,53 @@
+
+<br /><br />
+<%= render :partial=>"landing/inspire"%>
+<div style="position:absolute; bottom:20px; left:0px; text-align:center; width:100%;">
+	<div style="cursor:pointer;" onclick="Effect.ScrollTo('join_form'); $('login_input').focus();" >
+		<%=image_tag "loginsignup.png"%>
+	</div>
+</div>
+<br /><br />
+<br /><br />
+<div id="join_container">
+<div id="join_form">
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
+	<%= form_remote_tag(:update=>"top_container",:url=>{:controller=>:login, :action=>:signup})%>
+	<input type="hidden" id="time_zone" name="tz_offset">
+	<table>
+		<tr>
+			<td>
+				<div class="signup_field_entry login_name">
+					<div id="login_tip" class="input_tip tip" style="display:none;">
+						<div class="text">Login or create a new account! Start with your name!</div>
+						<div class="arrow-down"></div>
+					</div>
+					<%=render :partial=>"landing/server_message"%>
+		
+					<input id="login_input" type="text" name="email" placeholder="Name" onfocus="Element.show('login_tip');" onblur="Element.hide('login_tip');" required>
+				</div>
+			</td>
+			<td>
+				<div class="signup_field_entry">
+					<div id="password_tip" class="input_tip tip" style="display:none;">
+						<div class="text">Your login password, or a password for a new account!</div>
+						<div class="arrow-down"></div>
+					</div>
+					<input type="password" name="password" placeholder="Password" onfocus="Element.show('password_tip');" onblur="Element.hide('password_tip');" required>
+				</div>
+			</td>
+			<td><div class="form_submit"><%=submit_tag "Sign Up"%></div></td>
+		</tr>
+	</table>
+	</form>
+</div>
+</div>
+
+<script>
+updateTitle("Signup!");
+setupScene(1);
+document.getElementById('thebod').style.overflow = "hidden";
+$('time_zone').value = (-(new Date().getTimezoneOffset())).toString();
+</script>

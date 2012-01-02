@@ -1,0 +1,55 @@
+
+#server_messages{
+	position:absolute;
+	top: 55px;
+	left:15px;
+	color:white;
+	padding:10px;
+	font-size:18px;
+	border:1px solid #aaaaaa;
+	width:400px;
+	background: url('/images/trans_pixel.png');
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+
+#server_messages .arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+
+        border-bottom: 10px solid  #aaaaaa;
+        position:relative;
+        top:-20px;
+}
+
+#server_messages .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+
+        border-top: 20px solid #f00;
+}
+
+#server_messages .arrow-right {
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+
+        border-left: 15px solid #e5e564;
+        position:relative;
+        right:-200px;
+        top:10px;
+}
+
+#server_messages .arrow-left {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent; 
+
+        border-right:10px solid blue;
+}

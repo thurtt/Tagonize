@@ -1,0 +1,10 @@
+<%for project in @user.projects%>
+      <table class="overview_item" cellpadding=0 cellspacing=0>
+	<tr><td><div class="title" onclick="Effect.ScrollTo('project_header_<%=project.id%>')"><%=project.name%></div></td></tr>
+	<tr><td><div class="number" id="project_time_<%=project.id%>"></div><div class="arrow-container"><div class="arrow-down"></div></div></td></tr>
+	<script>
+		formatMinutes( $('project_time_<%=project.id%>'), '<%=project.total_work( session[:workingDate], session[:workingDate] )%>');
+	</script>
+	
+      </table>
+<%end%>

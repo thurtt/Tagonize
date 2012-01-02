@@ -1,0 +1,43 @@
+<h1>User Profile</h1>
+
+<%if flash[:notice] != nil%>
+	<p><span style="color:red;"><%=flash[:notice]%> </span></p>
+<%end%>
+
+<%@email = Email.new()%>
+
+<div class="user_profile">
+	<div id="default_picture">
+		<%if @user.email != nil%><%=image_tag gravatar_url(@user.email.address, {:size=>"100", :rating=>"pg"})%><%else%>You can select a Gravatar below.<%end%>
+	</div>
+	<div id="edit_profile">
+		<%form_for :user, :url=>{:controller=>"profile", :action=>"save"} do |f|%>
+		<%=f.hidden_field :id%>
+		<%=f.text_field :name%>
+		<%=submit_tag "Update"%>
+		<%end%>
+	</div>
+</div>
+
+<div class="email_list">
+
+	<%for email in @user.emails%>
+	<div class="email_entry">
+		<div class="image"><%=link_to(image_tag(gravatar_url(email.address, {:size=>"50", :rating=>"pg"})), {:action=>"set_default_email", :id=>email.id})%></div>
+		<div class="address"><%=email.address%> <%=email.verified%></div>
+		<div class="controls"><%=link_to "[delete]", :controller=>"profile", :action=>"unlink_email", :id=>email.id%></div>
+	</div>
+	<!-- <tr><td colspan=3><%=email.verification%></td></tr> -->
+	<%end%>
+	
+	<div class="link_email">
+		<%form_for :email, :url=>{:controller=>"profile", :action=>"link_email"} do |f|%>
+		<%=f.hidden_field :id%>
+		<%=f.hidden_field :user_id%>
+		<%=f.text_field :address%>
+		<%=submit_tag "Link Email"%>
+		<%end%>
+	</div>
+</div>
+
+

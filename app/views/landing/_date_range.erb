@@ -1,0 +1,16 @@
+
+<div id="date_box">
+  <div id="left_controls">
+    <div id="move_left" onclick="scroll( 7 )">
+    </div>
+  </div>
+  <div id="right_controls">
+      <div id="move_right" onclick="scroll( -7 )">
+      </div>
+  </div>
+</div>
+
+<script>
+    createCalendarSet("date_box", new Date( parseFloat( '<%= session[:workingDate].to_i * 1000 %>' ) ), "day_square_");
+    Element.show( 'working_<%= session[:workingDate].to_i * 1000 %>' );
+</script>

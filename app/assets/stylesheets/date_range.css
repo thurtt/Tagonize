@@ -1,0 +1,121 @@
+#date_range_area{
+    width: 900px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#move_left{
+        width: 0;
+        height: 0;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-right: 25px solid #1d49b9;
+        position:relative;
+        float: left;
+        margin: 5px;
+        cursor: pointer;
+}
+#move_left:hover{
+	border-right: 25px solid #3465DF;
+}
+
+#move_right{
+        width: 0;
+        height: 0;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-left: 25px solid #1d49b9;
+        position:relative;
+        float: right;
+        margin: 5px;
+        cursor: pointer;
+}
+
+#move_right:hover{
+	border-left: 25px solid #3465DF;
+}
+
+#date_box{
+    width: 738px;
+    height: 63px;
+    left: 50%;
+    margin-left: -369px;
+    position: absolute;
+    overflow: hidden;
+    background: url('/images/week_nav_bg.jpeg');
+    background-position:center;
+    background-position:repeat-y;
+}
+
+#left_controls{
+    width: 100px;
+    height: 63px;
+    position: absolute;
+    left:0px;
+    background: url('/images/fade_left.png');
+    background-position: left;
+    z-index: 10;
+    
+}
+
+#right_controls{
+    width: 100px;
+    height: 63px;
+    position: absolute;
+    float: right;
+    background: url('/images/fade_right.png');
+    background-position: right;
+    z-index: 10;
+    right:0px;
+}
+
+.day_square_selected{
+    border: 1px solid #07600f;
+    -moz-box-shadow: 0 0 4px 4px #097e15;
+    -webkit-box-shadow: 0 0 4px 4px #097e15;
+    box-shadow: 0 0 4px 4px #097e15;
+}
+.day_square_normal{
+    border: 1px solid #003579;
+}
+.day_square{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    float: left;
+    top: 5px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.month_selected{
+    background-image: url( '/images/date_header.png' );    
+}
+
+.month_normal{
+    background-image: url( '/images/blue button small.jpg' );    
+}
+
+.month{
+    width: 50px;
+    height: 17px;
+    color:#dddddd;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+.day{
+    text-align: center;
+    font-size: 16px
+}
+.wday{
+    text-align: center;
+    font-size: 12px;
+}
+.cal_working{
+    position:absolute;
+    top: 20px;
+    left: 12px;
+}

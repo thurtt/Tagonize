@@ -1,0 +1,117 @@
+#email_tip{
+	color:black;
+	background:#FAFAD2;
+	height:100px;
+	width: 200px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid #e5e564;
+	position:absolute;
+	left:100px;
+	top:295px;
+	z-index:1;
+	text-align:center;
+
+}
+#project_tip{
+	color:black;
+	background:#FAFAD2;
+	height:100px;
+	width: 200px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid #e5e564;
+	position:absolute;
+	left:50px;
+	top:143px;
+	z-index:1;
+	text-align:center;
+}
+
+
+.input_tip{
+	color:white;
+	margin:10px;
+	padding-left:30px;
+	padding-right:30px;
+	padding-top:30px;
+	height:50px;
+	width:400px;
+	font-size:18px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid #aaaaaa;
+	background: url('/images/trans_pixel.png');
+	position:absolute;
+	z-index:1;
+	top:-120px;
+	left:-50px;
+	text-align:center;
+}
+
+.tag_tip{
+	color:black;
+	background: #FAFAD2;
+	padding-left:25px;
+	padding-right:25px;
+	padding-bottom:15px;
+	padding-top:5px;
+	height:30px;
+	width:300px;
+	font-size:18px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid #e5e564;
+	position:absolute;
+	z-index:1;
+	top:45px;
+	left:-33px;
+	text-align:center;
+}
+
+
+.tip{
+}
+
+.tip .arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+
+        border-bottom: 10px solid #e5e564;
+        position:relative;
+        top:-15px;
+}
+
+.tip .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        position:absolute;
+        bottom:-15px;
+        left:80px;
+        border-top: 15px solid #aaaaaa;
+}
+
+.tip .arrow-right {
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+
+        border-left: 15px solid #e5e564;
+        position:relative;
+        right:-200px;
+        top:10px;
+}
+
+.tip .arrow-left {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent; 
+
+        border-right:10px solid blue;
+}

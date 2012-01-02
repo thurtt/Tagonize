@@ -1,0 +1,51 @@
+<!DOCTYPE html> <!-- The new doctype -->
+
+<html>
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Sign up | Tagonize.com</title>
+
+	
+	<%= stylesheet_link_tag "style.css"%>
+	<%= stylesheet_link_tag "landing.css"%>
+	<%= stylesheet_link_tag "profile.css"%>
+	<%= stylesheet_link_tag "time_entries"%>
+	<%= stylesheet_link_tag "project_overview"%>
+	<%= stylesheet_link_tag "project_creation"%>
+	<%= stylesheet_link_tag "project_list"%>
+	<%= stylesheet_link_tag "server_message"%>
+	<%= stylesheet_link_tag "tips"%>
+	<%= stylesheet_link_tag "date_range" %>
+	<%= stylesheet_link_tag "comment_bullet" %>
+	<%= stylesheet_link_tag "report" %>
+	<%= javascript_include_tag :defaults%>
+	<%= javascript_include_tag "scriptaculous" %>
+	<%= javascript_include_tag "date_sorcery" %>
+	<%= javascript_include_tag "project_list" %>
+	<%= javascript_include_tag "report" %>
+
+	<!-- Internet Explorer HTML5 enabling script: -->
+
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<style type="text/css">
+
+			.clear {
+				zoom: 1;
+				display: block;
+			}
+
+		</style>
+
+	<![endif]-->
+
+</head>
+
+<body onload="windowLoad();" id="thebod">
+
+<%=yield%>
+</body>
+
+</html>

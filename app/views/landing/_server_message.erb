@@ -1,0 +1,4 @@
+<%if flash[:notice] != nil%>
+	<div id="server_messages"><div class="arrow-up"></div><%=flash[:notice]%></div><script>$('login_input').focus();</script>
+	<%flash[:notice] = nil%>
+<%end%>

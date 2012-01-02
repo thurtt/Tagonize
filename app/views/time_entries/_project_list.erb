@@ -1,0 +1,36 @@
+
+<%for project in @user.projects %>
+	<div id="project_item_list_<%=project.id%>" class="project_item_list" onmouseover="revealCollab('collab_list_<%=project.id%>');">	
+		<div id="project_header_<%=project.id%>" class="project_header" >
+		
+			<div id="muted_<%=project.id%>" class="visibility_icon" onclick="projectMute('<%=project.id%>')">
+				<%= render :partial=>"project_mute", :locals=>{:project=>project}%>
+			</div>
+			
+			<%=project.name%>
+			
+			<div id="project_graph_<%=project.id%>" class="graph_icon icon_border_not_selected" onclick="showProjectReport( '<%=project.id%>' )">
+				<%=image_tag "report.png", :width=>"22px", :height=>"22px", :alt=>"Project Graph" %>
+			</div>
+			
+			<div id="effort_list_<%=project.id%>" class="list_icon icon_border_selected" onclick="showEffortList( '<%=project.id%>' )">
+				<%=image_tag "tag.png", :width=>"22px", :height=>"22px", :alt=>"Effort List" %>
+			</div>
+			
+		
+		</div>
+		<%= render :partial=>"collab_list", :locals=>{ :project=>project } %>
+		<div class="project_details" id="project_details_<%=project.id%>" <%if project.is_muted_for(@user)%>style="display:none;"<%end%>>
+			<div id="details_effort_list_<%=project.id%>">
+				<%=render :partial=>"details_effort_list", :locals=>{ :project=>project } %>
+			</div>
+
+
+			<div id="details_report_<%=project.id%>" style="display:none;height:400px;">
+
+			</div>
+			
+		</div>
+
+	</div>
+<%end%>

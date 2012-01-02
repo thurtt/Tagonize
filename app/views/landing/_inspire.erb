@@ -1,0 +1,151 @@
+<script>
+var view_element = null;
+function setElement( element ){
+	view_element = element;
+}
+
+var show_inspiration = null;
+function swapInspire(insp){
+	if (insp == show_inspiration)
+		return;
+	if (show_inspiration != null){
+		show_inspiration.fade({ duration: 0.4}); //style.display = 'none';
+	}
+	show_inspiration = insp;
+
+	show_inspiration.appear({ duration: 0.4}); //style.display = '';
+}
+
+</script>
+
+<div id="inspiration" class="inspire_widget">
+	<div class="inspire_boilerplate">For </div>
+	<div id="scripty_morph_demo"> 
+		<div onclick="setElement(this); swapInspire($('artist'));">Artists</div> 
+		<div onclick="setElement(this); swapInspire($('developer'));">Developers</div>
+		<div onclick="setElement(this); swapInspire($('musician'));">Musicians</div>
+		<div onclick="setElement(this); swapInspire($('artisan'));">Artisans</div> 
+		<div onclick="setElement(this); swapInspire($('planner'));">Planners</div>
+		<div onclick="setElement(this); swapInspire($('manager'));">Managers</div>
+		<div onclick="setElement(this); swapInspire($('videographer'));">Videographers</div>
+		<div onclick="setElement(this); swapInspire($('muffins'));">Muffins</div>
+	</div> 
+	<div class="content" id="developer" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/artist_screen.png"%>
+			<br/>
+			<ul>
+				<li>Agile effort tracking for agile developers.</li>
+				<li>Use different emails to track effort.</li>
+				<li>Collaborate on more projects with more people.</li>
+			</ul>
+		</div>
+	</div>
+	<div class="content" id="artist" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/developer_screen.png"%>
+			<br/>
+			<ul>
+				<li>Spend more time being creative.</li>
+				<li>Tag your stuff now, sort it out later.</li>
+			</ul>
+			
+		</div>
+	</div>
+	<div class="content" id="artisan" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/developer_screen.png"%>
+			<br/>
+			<ul>
+				<li>Track exactly how long your craft takes.</li>
+				<li>Know how much you get for your time.</li>
+				<li>Show value to your customers with badges.</li>
+			</ul>
+			
+		</div>
+	</div>
+	<div class="content" id="planner" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/developer_screen.png"%>
+			<br/>
+			<ul>
+				<li>Plan complex weddings and parties.</li>
+				<li>Divide tasks and get the help you need.</li>
+				<li>See when tasks are done in real time.</li>
+				<li>Sleep better!</li>
+			</ul>
+		</div>
+	</div>	
+	<div class="content" id="manager" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/developer_screen.png"%>
+			<br/>
+			<ul>
+				<li>Manage agile and waterfall projects.</li>
+				<li>Complex systems need simple environments.</li>
+				<li>See when tasks are done in real time.</li>
+				<li>Get deliverables inline with time tracking.</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="content" id="videographer" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/developer_screen.png"%>
+			<br/>
+			<ul>
+				<li>Collaborate with different types of artists.</li>
+				<li>Track deliverables between musicians, studio, and editing.</li>
+				<li>See when tasks are done in real time.</li>
+				<li>Spend more time doing what you do best. Create.</li>
+			</ul>
+		</div>
+	</div>	
+	
+	<div class="content" id="musician" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/developer_screen.png"%>
+			<br/>
+			<ul>
+				<li>Collaborate with musicians anywhere.</li>
+				<li>Involve engineering and mastering by email.</li>
+				<li>Know how long it <b>really</b> takes.</li>
+				<li>Spend more time doing what you do best. Create.</li>
+			</ul>
+		</div>
+	</div>	
+		
+	<div class="content" id="muffins" style="display:none;">
+		<div class="centered">
+			<%=image_tag "screens/muffins.png"%>
+			<br/>
+			Eat tasty muffins.
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+swapInspire($('artist'));
+
+  Array.prototype.setTop = function(){
+      if (view_element != null){
+      	var oldlist = this;
+      	var newlist = [view_element];
+      	for (var i=0; i<oldlist.length; i++){
+      		if ( oldlist[i] != view_element ){ newlist.push( oldlist[i] );}
+      	}
+      	return newlist;
+      }
+      else{ return this;}
+  };
+ 
+  (function(){
+    function foo(){
+      $('scripty_morph_demo').select('div').setTop().each(function(e,i){
+        e.morph('top:'+i*e.getHeight()+'px',{duration:0.4}); 
+      });
+    }
+    $('scripty_morph_demo').observe('click',foo);
+    foo();
+  })();
+</script> 

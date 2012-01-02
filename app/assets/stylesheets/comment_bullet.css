@@ -1,0 +1,50 @@
+.delivery{
+	position:absolute;
+	display:inline;
+	border:2px solid transparent;
+}
+
+.comment_wrapper{
+	border:1px solid #aaaaaa;
+	background:#eeeeee;
+	color:black;
+	font-size:12px;
+	
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding:8px;
+	margin:4px;
+	width:200px;
+	position:absolute;
+	top:24px;
+	left:-25px;
+	opacity:0.93 !important;
+	filter:alpha(opacity=93) !important;
+	z-index:2000; /* seriously arbitrary. */
+}
+
+.has_deliverable{
+	border:2px solid #23a900;
+	background: #23a900;
+}
+
+.comment_wrapper .close {
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:12px;
+	height:12px;
+	cursor:pointer;
+}
+
+.comment_wrapper .arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+
+        border-bottom: 5px solid  #aaaaaa;
+        position:relative;
+        top:-14px;
+        left:16px;
+}

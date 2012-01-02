@@ -1,0 +1,79 @@
+.tag_area
+{
+    position: relative;
+    border: 1px solid blue;
+    width: 600px;
+    height: 50px;
+    margin: auto;
+}
+
+#time_area
+{
+    position: relative;
+    top: 50px;
+    width: 600px;
+    height: 500px;
+    margin: auto;
+}
+
+.time_record
+{
+    position: relative;
+    top: 10px;
+    width: 600px;
+    height: 50px;
+    background-color: #dddddd;
+    border-radius: 10px;
+}
+
+.project_tag_list
+{
+    position: relative;
+    width: 525px;
+    height: 50px;
+    float: left;
+    background-color: #dddddd;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 10px;
+}
+
+.project_slider_container
+{
+    top: -50px;
+    position: relative;
+    width: 600px;
+    height: 50px;
+    float: left;
+    background-color: #dddddd;
+    border-radius: 10px;
+}
+
+.project_hours_container
+{
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    right: 0px;
+}
+
+.project_slider_track
+{
+    top: 20px;
+    width: 450px;
+    height: 8px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    background-color: blue;
+    position: relative;
+    left: 50px;
+}
+
+.project_slider_button
+{
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: -14px;
+}

@@ -1,0 +1,26 @@
+<%if flash[:notice] != nil%>
+ <div id="server_messages"><p><span style="color:red;"><%=flash[:notice]%> </span></p></div>
+ <%flash[:notice] = nil%>
+<%end%>
+
+<script>
+  updateTitle("Time Entry");
+</script>
+
+
+<div id="project_overview">
+        <%=render :partial=>"project_overview" %>
+</div>
+<div class="creation">
+	<%=render :partial=>"project_create"%>
+</div>
+
+<div id="project_list">
+	<%=render :partial=>"project_list"%>
+</div>
+<script>
+  Element.hide( 'working_<%= session[:workingDate].to_i * 1000 %>' );
+</script>
+
+
+

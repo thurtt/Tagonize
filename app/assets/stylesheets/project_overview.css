@@ -1,0 +1,51 @@
+
+#project_overview{
+	padding:20px;
+	width:100%;
+	height:100px;
+	text-align:center;
+	
+}
+.overview_item{
+	display:inline-table;
+	color:white;
+	font-size:12px;
+	border: 0px;
+}
+.overview_item td{
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.overview_item .title {
+	padding:20px;
+        font-size:16px;
+	border:1px solid #aaaaaa;
+	background: url('/images/trans_pixel.png');
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.overview_item .number {
+	text-align:center;
+	font-size:16px;
+	color:black;
+	padding-top:15px;
+}
+
+.overview_item .arrow-container{
+	text-align:center;
+}
+
+.overview_item .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        margin:auto;
+
+        border-top: 10px solid #aaaaaa;
+        position:relative;
+        top:-34px;
+}

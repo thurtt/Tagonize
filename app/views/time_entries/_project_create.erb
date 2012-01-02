@@ -1,0 +1,27 @@
+
+<%if @user.email != nil%>
+	
+	<div class="project_create">
+		<%if @user.projects.length < 1%>
+		<div id="project_tip" class="tip">
+			<div class="arrow-right"></div>
+			<div class="text">Create a new project!<br/> Start with a name.</div>
+		</div>
+		<%end%>
+		
+		<%= form_remote_tag(:update=>"content",:url=>{:controller=>:time_entries, :action=>:project_create})%>
+			<table>
+			<tr>
+				<td><div class="field_entry"> <input type="text" name="name" placeholder="New Project" required></div></td>
+				<td><div class="project_submit"><%=submit_tag "Create"%></div></td>
+			</tr>
+			</table>
+		</form>
+	</div>
+
+<%else%>
+<div class="project_create" style="text-align:center; font-size:18px;">
+	You still need to add a default email address! <br /><br />
+	We associate all of our projects, participation, and effort with email addresses.
+</div>
+<%end%>

@@ -1,0 +1,89 @@
+
+<% project.sort_efforts_by_tag(project.efforts).each do |effort| %>
+	
+	<div id="effort_item_<%=effort.id%>" style="height:35px;<%if effort.is_muted_for(@user)%>display:none;opacity:0.5;filter:alpha(opacity=50);<%end%>">
+		<script>
+			
+			<%if effort.is_muted_for(@user)%>mutedEfforts.push(['<%=project.id%>', '<%=effort.id%>',false]);<%end%>
+			function updateTime( mins ){
+				formatEffortTime( $('project_minutes_<%=effort.id%>'), mins );
+			}
+			showNote( '<%=effort.id%>' );
+		</script>
+		<div class="comment_icon" id="comment_icon_<%=effort.id%>" ><img height="16px" width="16px" src="images/comment.png" /></div>
+		<div id="mutedEffort_<%=effort.id%>" class="effort_mute" onclick="effortMute('<%=effort.id%>')"><%= render :partial=>"effort_mute", :locals=>{:effort=>effort}%></div>
+		<div class="project_time" id="project_minutes_<%=effort.id%>" onclick="new Effect.toggle( 'time_entry_row_<%=effort.id%>', 'slide', { afterFinish: function() { createSlider( '<%=effort.id%>' ); } } );"></div>
+		<script>
+			formatEffortTime( $('project_minutes_<%=effort.id%>'), '<%=effort.total_work( session[:workingDate], session[:workingDate] )%>');
+		</script>
+		
+		<% effort.sort_tags_by_taginfo(project.tag_weight_for(project.efforts)).each do |tag| %>
+			<div class="tag" id="tag_id_<%=tag.id%>" 
+				onmouseover="highlightTag(<%=tag.taginfo.id%>,'tag_highlight');" 
+				onmouseout="highlightTag(<%=tag.taginfo.id%>,'tag');"
+				onclick="editTag( <%=tag.id%> )">
+				<%=tag.taginfo.name%>
+			</div>
+			<div id="edit_tag_<%=tag.id%>" style="display:none" class="new_tag">
+				<%= form_remote_tag(:update=>"content",:url=>{:controller=>:time_entries, :action=>:tag_update}, :html=>{ :id=>"form_update_tag_" + tag.id.to_s }, :complete => "Element.hide('tag_edit_working_#{effort.id}');",:loading => "Element.show('tag_edit_working_#{effort.id}')")%>
+					<input type="hidden" name="tag_id" value="<%=tag.id%>">
+					<input type="hidden" name="project_id" value="<%=project.id%>">
+					<input id="taginfo_name_edit_<%=tag.id%>" onblur="updateTag('<%=tag.id%>');" class="tag add_input" value="<%=tag.taginfo.name%>" name="taginfo[name]" type="text" placeholder="<%=tag.taginfo.name%>" >
+					<div class="auto_complete" id="taginfo_hint_<%=tag.id%>"></div>
+				</form>
+			</div>
+			<script>
+				//new Ajax.Autocompleter('taginfo_name_edit<%=effort.id%>','taginfo_hint_<%=effort.id%>', '/time_entries/auto_complete_for_taginfo_name', { tokens: ',' });
+				addTag($('tag_id_<%=tag.id%>'),<%=tag.taginfo.id%>);
+			
+			</script>
+		<% end %>
+		
+		<div class="add" id="add_<%=effort.id%>" onclick="showNewTag( '<%=effort.id%>' )">+</div>
+		
+		<div class="new_tag" style="display:none;" id="add_tag_<%=effort.id%>">
+			<div>
+				<%= form_remote_tag(:update=>"content",:url=>{:controller=>:time_entries, :action=>:tag_create}, :complete => "Element.hide('tag_edit_working_#{effort.id}');",:loading => "Element.show('tag_edit_working_#{effort.id}')")%>
+				
+					<input type="hidden" name="project_id" value="<%=project.id%>">
+					<input type="hidden" name="effort_id" value="<%=effort.id%>">
+					<input id="taginfo_name_<%=effort.id%>" onblur="setTimeout( function(){hideNewTag(<%=effort.id%>)}, 5000 )" class="tag add_input" name="taginfo[name]" type="text" placeholder="Enter a tag name..." >
+					<div class="auto_complete" id="taginfo_hint_<%=effort.id%>"></div>
+					<script>
+					new Ajax.Autocompleter('taginfo_name_<%=effort.id%>','taginfo_hint_<%=effort.id%>', '/time_entries/auto_complete_for_taginfo_name', { tokens: ',' });
+					</script>
+				</form>
+			</div>
+		</div>
+		<div id="tag_edit_working_<%=effort.id%>" style="position:relative;float:right;top:4px;display:none;"><%=image_tag "working.gif", :size=>"20x20", :alt=>"working"%></div>
+		
+		<div style="float:right; margin-top:10px; margin-right:5px;">
+			<!-- collection of contributing participants -->
+			<%for te in effort.timeentries_created_between( session[:workingDate], session[:workingDate] )%>
+				<div class="delivery<%=" has_deliverable" if te.deliverable%>" <%if te.deliverable%>onmouseover="revealComment('deliverable_<%=te.id%>');"<%end%>>
+					<%=image_tag gravatar_url(te.email.address, {:size=>"16", :rating=>"pg"})%>
+					<div id="deliverable_<%=te.id%>" class="comment_wrapper" style="display:none;" onmouseout="this.style.display='none';">
+						<div class="arrow-up"></div><%=auto_link(te.deliverable.comment) if te.deliverable%>.
+						<div class="close" onclick="$('deliverable_<%=te.id%>').style.display='none';">X</div>
+					</div>
+				</div>
+			<%end%>
+		</div>
+	</div>
+	<div class="time_entry_box" style="display:none;" id="time_entry_row_<%=effort.id%>">
+		<div>
+			<%= form_remote_tag( :update=>"project_overview", :url=>{:controller=>:time_entries, :action=>:update_time_entry}, :html=>{ :id=>"form_" + effort.id.to_s },:complete => "Element.hide('time_entry_working_#{effort.id}');",:loading => "Element.show('time_entry_working_#{effort.id}')")%>	
+				<div class="effort_slider" id="effort_slider_<%=effort.id%>"><div class="effort_button" id="effort_button_<%=effort.id%>"><img src="images/slide_button.png"/></div></div>
+				<input id="minutes_<%=effort.id%>" type="hidden" name="minutes" value="<%=effort.total_work( session[:workingDate], session[:workingDate] ) %>">
+				<input id="effort_id_<%=effort.id%>" type="hidden" name="effort_id" value="<%=effort.id%>">
+				<%timeentry = effort.timeentries_created_between_for_email( session[:workingDate], session[:workingDate], @user.email_for_project(project).id )[0] %>
+				<div class="commentary">
+					<textarea id="comment_<%=effort.id%>" type="text" name="comment" placeholder="Add commentary or deliverable?" onblur="updateCommentary('<%=effort.id%>')"><%if timeentry != nil
+						%><%=timeentry.deliverable.comment if timeentry.deliverable%><%end%></textarea>
+				</div>
+				<div class="time_entry_working" id="time_entry_working_<%=effort.id%>" style="display:none;float:right;"><%=image_tag "working.gif", :size=>"14x14", :alt=>"working"%></div>
+				
+			</form>
+		</div>
+	</div>
+<% end %>

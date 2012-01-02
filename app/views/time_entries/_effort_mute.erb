@@ -1,0 +1,11 @@
+<%if effort.is_muted_for(@user)%>
+	<%=image_tag "mute_small.png", :alt=>"hidden"%>
+	<script>
+		hideEffort('<%=effort.id%>','<%=effort.project.id%>');
+	</script>
+<%else%>
+	<%=image_tag "loud_small.png",:alt=>"visible"%>
+	<script>
+		unhideEffort('<%=effort.id%>','<%=effort.project.id%>');
+	</script>
+<%end%>

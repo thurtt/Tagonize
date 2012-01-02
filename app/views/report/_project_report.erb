@@ -1,0 +1,18 @@
+  <div class="left_arrow" id="left_arrow_<%=project_id%>" onclick="showPreviousGraph( <%=project_id%> )"></div>
+  <div class="right_arrow" id="right_arrow_<%=project_id%>" onclick="showNextGraph( <%=project_id%> )"></div> 
+  <div class="report_graph" id="report_loading_<%=project_id%>" style="padding-top:125px;text-align:center;">
+          <div style="font-size: 26px;">Loading Reports. Please Wait...</div>
+          <div><%=image_tag "working.gif" %></div>
+  </div>
+  <div class="report_graph" id="project_report_<%=project_id%>" style="display:none">
+    <%=project_report_tag :project_id=>project_id, :width=>"575px", :height=>"400px", :onload=>"$('report_loading_" + project_id.to_s + "').style.display='none';" %>
+  </div>
+  <div class="report_graph" id="effort_report_<%=project_id%>" style="display:none">
+    <%=effort_report_tag :project_id=>project_id, :width=>"575px", :height=>"400px" %>
+  </div>
+  <div class="report_graph" id="effort_summary_<%=project_id%>">
+    <%= javascript_tag remote_function( :update=>"effort_summary_#{project_id}", :url=>{:controller=>"report", :action=>"effort_summary", :id=>project_id} ) %>
+  </div>
+  <div class="report_graph" id="tag_summary_<%=project_id%>" style="display:none">
+    <%= javascript_tag remote_function( :update=>"tag_summary_#{project_id}", :url=>{:controller=>"report", :action=>"tag_summary", :id=>project_id} ) %>
+  </div>

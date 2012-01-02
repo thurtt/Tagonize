@@ -1,0 +1,44 @@
+
+<br /><br />
+<%= render :partial=>"landing/inspire"%>
+<div style="position:absolute; bottom:20px; left:0px; text-align:center; width:100%;">
+	<div style="cursor:pointer;" onclick="Effect.ScrollTo('join_form'); $('login_input').focus();" >
+		<%=image_tag "loginsignup.png"%>
+	</div>
+</div>
+<br /><br />
+<br /><br />
+
+<div id="join_container">
+<div id="join_form">
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
+
+<%=render :partial=>"landing/server_message"%>
+
+
+
+<div class="explaination">We can create a new account with these credentials. Retype your password, just to make sure.</div>
+
+<div id="retype_password" class="extra">
+<div>
+	<%= form_remote_tag(:update=>"top_container",:url=>{:controller=>:login, :action=>:create_user})%>
+	<input type="hidden" name="email" value="<%=params[:email]%>">
+	<input type="hidden" name="password" value="<%=params[:password]%>">
+	<div class="signup_field_entry"> <input type="password" name="password_retype" placeholder="Retype Password" required> </div>
+	<div class="form_submit"><%=submit_tag "Sign Up"%></div>
+	</form>
+</div>
+</div>
+
+
+</div>
+</div>
+<script>
+updateTitle("New Account Creation");
+setupScene(1);
+//Effect.ScrollTo('thebod');
+window.scrollTo(0,1);
+</script>

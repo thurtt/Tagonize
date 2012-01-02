@@ -1,0 +1,29 @@
+<div class="project_item">
+	<%= render :partial=>"project_item", :locals=>{ :project=>project } %>
+	<div style="position:absolute;">
+		<div id="effort_toggle_switch_<%=project.id%>" class="effort_toggle_switch" onclick="toggleHiddenEfforts('<%=project.id%>');"></div>
+		<script>
+			updateEffortSwitch('<%=project.id%>');
+		</script>
+		<span class="add" onclick="showNewTag( '<%=project.id%>_0' )">+</span></td>
+		<div class="new_tag" style="display:none;" id="add_tag_<%=project.id%>_0">
+			<div>
+				<%= form_remote_tag(:update=>"content",:url=>{:controller=>:time_entries, :action=>:tag_create})%>
+					<input type="hidden" name="project_id" value="<%=project.id%>">
+					<input type="hidden" name="effort_id" value="">
+					<input id="taginfo_name_<%=project.id%>_0" class="tag add_input" name="taginfo[name]" type="text" placeholder="Enter a tag name..." onblur="setTimeout( function(){hideNewTag('<%=project.id%>_0')}, 5000 )" >
+					<div class="auto_complete" id="taginfo_hint_<%=project.id%>_0"></div>
+					<script>
+						new Ajax.Autocompleter('taginfo_name_<%=project.id%>_0','taginfo_hint_<%=project.id%>_0', '/time_entries/auto_complete_for_taginfo_name', { tokens: ',' });
+					</script>
+				</form>
+			</div>
+		</div>
+		<%if @user.projects.length == 1 && project.efforts.length < 1%>
+		<div id="tag_tip" class="tag_tip tip">
+			<div class="arrow-up"></div>
+			<div class="text">Tag this to create something to track!</div>
+		</div>
+		<%end%>
+	</div>
+</div>

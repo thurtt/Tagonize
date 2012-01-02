@@ -1,0 +1,14 @@
+<table class="user_profile">
+	<tr>
+		<td>
+			<div id="default_picture">
+			<%if @user.email != nil%><%=image_tag gravatar_url(@user.email.address, {:size=>"75", :rating=>"pg"})%><%end%>
+			</div>
+		</td>
+		<td>
+			<div id="edit_profile"><%= in_place_editor_field :user, 'name', {}, :url=>{:controller=>'profile', :action=>'set_user_name', :id=>@user.id} %></div>
+			<div id="edit_location"><%= in_place_editor_field :user, 'location', {}, :url=>{:controller=>'profile', :action=>'set_user_location', :id=>@user.id} %></div>
+		</td>
+	</tr>
+</table>
+	
