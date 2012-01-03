@@ -1,6 +1,6 @@
 html, body{
 	background-color:#003579;
-	background-image:url('/images/background.jpg');
+	background-image:url('/assets/background.jpg');
 	background-repeat:no-repeat;
 	background-position:center;
 	background-attachment:fixed;
@@ -113,7 +113,7 @@ h2{
 	height:35px;
 	border:1px solid #0db211;
 	background-color:#00790e;
-	background-image: url('/images/green_button.jpg');
+	background-image: url('/assets/green_button.jpg');
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	cursor:pointer;

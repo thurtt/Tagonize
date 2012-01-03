@@ -237,7 +237,7 @@ function showProjectReport( id ){
 }
 
 function workingGIF( target ){
-	$(target).innerHTML = "<img src='/images/working.gif' height=16 width=16>"
+	$(target).innerHTML = "<img src='/assets/working.gif' height=16 width=16>"
 }
 
 function projectMute( id ){

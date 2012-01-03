@@ -41,7 +41,7 @@
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 	border:1px solid #aaaaaa;
-	background: url('/images/trans_pixel.png');
+	background: url('/assets/trans_pixel.png');
 	position:absolute;
 	z-index:1;
 	top:-120px;

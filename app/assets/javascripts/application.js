@@ -1,5 +1,9 @@
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+//= require jquery
+//= require jquery_ujs
+//= require_tree .
 
 var winW = 630, winH = 460;
 var current_scene = 1;
@@ -25,10 +29,8 @@ function getWindowMetrics(){
 }
 
 function windowLoad(){
-	//window.scrollTo(0,1);
 	getWindowMetrics();
-	Effect.ScrollTo('thebod');
-	
+	ScrollToDiv('thebod');	
 }
 // Animation. This will be done with scenes.
 function setupScene(scene){
@@ -40,12 +42,14 @@ function setupScene(scene){
 	case 1:
 		//login
 		_y = winH * 3;
-		new Effect.Move('bottom_container',{ x: _x, y: _y, mode: "absolute"  });
+		//new Effect.Move('bottom_container',{ x: _x, y: _y, mode: "absolute"  });
+		MoveTo( 'bottom_container', _x, _y );
 		break;
 	case 2:
 		//reveal lower thingo.
 		_y = 260;
 		new Effect.Move('bottom_container',{ x: _x, y: _y, mode: "absolute"  });
+		MoveTo( 'bottom_container', _x, _y );
 		break;
 	case 3:
 		//reveal top, but not login thingo.
@@ -56,7 +60,8 @@ function setupScene(scene){
 		_y = base + emails + submission;
 		//if (_y < 550 )
 		//	_y = 550;
-		new Effect.Move('bottom_container',{ x: _x, y: _y, mode: "absolute"  });
+		//new Effect.Move('bottom_container',{ x: _x, y: _y, mode: "absolute"  });
+		MoveTo( 'bottom_container', _x, _y );
 		break;
 	default:
 		// I have no idea.
@@ -80,7 +85,8 @@ function toggleSlide( me, object ) {
 		dist = -($(object).clientHeight - 12);
 	}
 	
-	new Effect.Move( object, { x: 0, y: dist, mode: 'relative' });
+	//new Effect.Move( object, { x: 0, y: dist, mode: 'relative' });
+	MoveTo( object, _x, _y );
 }
 
 function updateTitle(title){

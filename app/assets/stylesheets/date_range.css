@@ -43,7 +43,7 @@
     margin-left: -369px;
     position: absolute;
     overflow: hidden;
-    background: url('/images/week_nav_bg.jpeg');
+    background: url('/assets/week_nav_bg.jpeg');
     background-position:center;
     background-position:repeat-y;
 }
@@ -53,7 +53,7 @@
     height: 63px;
     position: absolute;
     left:0px;
-    background: url('/images/fade_left.png');
+    background: url('/assets/fade_left.png');
     background-position: left;
     z-index: 10;
     
@@ -64,7 +64,7 @@
     height: 63px;
     position: absolute;
     float: right;
-    background: url('/images/fade_right.png');
+    background: url('/assets/fade_right.png');
     background-position: right;
     z-index: 10;
     right:0px;
@@ -91,11 +91,11 @@
 }
 
 .month_selected{
-    background-image: url( '/images/date_header.png' );    
+    background-image: url( '/assets/date_header.png' );    
 }
 
 .month_normal{
-    background-image: url( '/images/blue button small.jpg' );    
+    background-image: url( '/assets/blue button small.jpg' );    
 }
 
 .month{

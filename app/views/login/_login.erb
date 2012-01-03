@@ -14,7 +14,8 @@
 <br /><br />
 <br /><br />
 <br /><br />
-	<%= form_remote_tag(:update=>"top_container",:url=>{:controller=>:login, :action=>:signup})%>
+	
+	<%= form_tag(:url=>{:controller=>:login, :action=>:signup}, :remote=>true)%>
 	<input type="hidden" id="time_zone" name="tz_offset">
 	<table>
 		<tr>
