@@ -171,7 +171,7 @@ function createCalendarObject( stamp ){
     workingDiv.setAttribute( 'id', 'working_' + stamp );
     workingDiv.className = 'cal_working';
     workingDiv.style.display="none";
-    workingDiv.innerHTML= '<img src="images/working.gif" width="24px" height="24px" />';
+    workingDiv.innerHTML= '<img src="/assets/working.gif" width="24px" height="24px" />';
     
     calObj.appendChild( headerDiv );
     calObj.appendChild( middleDiv );

@@ -10,7 +10,7 @@
 			}
 			showNote( '<%=effort.id%>' );
 		</script>
-		<div class="comment_icon" id="comment_icon_<%=effort.id%>" ><img height="16px" width="16px" src="images/comment.png" /></div>
+		<div class="comment_icon" id="comment_icon_<%=effort.id%>" ><img height="16px" width="16px" src="/assets/comment.png" /></div>
 		<div id="mutedEffort_<%=effort.id%>" class="effort_mute" onclick="effortMute('<%=effort.id%>')"><%= render :partial=>"effort_mute", :locals=>{:effort=>effort}%></div>
 		<div class="project_time" id="project_minutes_<%=effort.id%>" onclick="new Effect.toggle( 'time_entry_row_<%=effort.id%>', 'slide', { afterFinish: function() { createSlider( '<%=effort.id%>' ); } } );"></div>
 		<script>
@@ -73,7 +73,7 @@
 	<div class="time_entry_box" style="display:none;" id="time_entry_row_<%=effort.id%>">
 		<div>
 			<%= form_remote_tag( :update=>"project_overview", :url=>{:controller=>:time_entries, :action=>:update_time_entry}, :html=>{ :id=>"form_" + effort.id.to_s },:complete => "Element.hide('time_entry_working_#{effort.id}');",:loading => "Element.show('time_entry_working_#{effort.id}')")%>	
-				<div class="effort_slider" id="effort_slider_<%=effort.id%>"><div class="effort_button" id="effort_button_<%=effort.id%>"><img src="images/slide_button.png"/></div></div>
+				<div class="effort_slider" id="effort_slider_<%=effort.id%>"><div class="effort_button" id="effort_button_<%=effort.id%>"><img src="/assets/slide_button.png"/></div></div>
 				<input id="minutes_<%=effort.id%>" type="hidden" name="minutes" value="<%=effort.total_work( session[:workingDate], session[:workingDate] ) %>">
 				<input id="effort_id_<%=effort.id%>" type="hidden" name="effort_id" value="<%=effort.id%>">
 				<%timeentry = effort.timeentries_created_between_for_email( session[:workingDate], session[:workingDate], @user.email_for_project(project).id )[0] %>

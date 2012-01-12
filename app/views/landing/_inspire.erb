@@ -9,11 +9,11 @@ function swapInspire(insp){
 	if (insp == show_inspiration)
 		return;
 	if (show_inspiration != null){
-		show_inspiration.fadeOut( 0.4 ); //style.display = 'none';
+		show_inspiration.fadeOut( 400 ); //style.display = 'none';
 	}
 	show_inspiration = insp;
 
-	show_inspiration.fadeIn( 0.4 ); //style.display = '';
+	show_inspiration.fadeIn( 400 ); //style.display = '';
 }
 </script>
 
@@ -30,7 +30,7 @@ function swapInspire(insp){
 		<div onclick="setElement(this); swapInspire($('videographer'));">Videographers</div>
 		<div onclick="setElement(this); swapInspire($('muffins'));">Muffins</div>
 	</div> 
-	<div class="content" id="developer" style="display:none;">
+	<div class="content" id="developer" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/artist_screen.png"%>
 			<br/>
@@ -41,7 +41,7 @@ function swapInspire(insp){
 			</ul>
 		</div>
 	</div>
-	<div class="content" id="artist" style="display:none;">
+	<div class="content" id="artist" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -52,7 +52,7 @@ function swapInspire(insp){
 			
 		</div>
 	</div>
-	<div class="content" id="artisan" style="display:none;">
+	<div class="content" id="artisan" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -64,7 +64,7 @@ function swapInspire(insp){
 			
 		</div>
 	</div>
-	<div class="content" id="planner" style="display:none;">
+	<div class="content" id="planner" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -76,7 +76,7 @@ function swapInspire(insp){
 			</ul>
 		</div>
 	</div>	
-	<div class="content" id="manager" style="display:none;">
+	<div class="content" id="manager" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -89,7 +89,7 @@ function swapInspire(insp){
 		</div>
 	</div>
 	
-	<div class="content" id="videographer" style="display:none;">
+	<div class="content" id="videographer" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -102,7 +102,7 @@ function swapInspire(insp){
 		</div>
 	</div>	
 	
-	<div class="content" id="musician" style="display:none;">
+	<div class="content" id="musician" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -115,7 +115,7 @@ function swapInspire(insp){
 		</div>
 	</div>	
 		
-	<div class="content" id="muffins" style="display:none;">
+	<div class="content" id="muffins" style="opacity: 0.0;filter:alpha(opacity=0);">
 		<div class="centered">
 			<%=image_tag "screens/muffins.png"%>
 			<br/>
@@ -142,12 +142,9 @@ swapInspire($('artist'));
  
   (function(){
     function foo(){
-      // $('scripty_morph_demo').select('div').setTop().each(function(e,i){
       divObjs = $('#scripty_morph_demo').find('div');
       for( i=0; i < divObjs.length; i++ ){
-		divObjs[i].animate( {top: i*divObjs[i].clientHeight+'px'}, 0.4);
-      //.css('top'setTop().each(function(e,i){
-        //e.morph('top:'+i*e.getHeight()+'px',{duration:0.4}); 
+		$(divObjs[i]).animate( {top: i*divObjs[i].clientHeight+'px'}, 400);
       }
     }
     $('scripty_morph_demo').ready( foo );
