@@ -143,9 +143,12 @@ swapInspire($('artist'));
   (function(){
     function foo(){
       // $('scripty_morph_demo').select('div').setTop().each(function(e,i){
-      $('#scripty_morph_demo DIV').css('top'setTop().each(function(e,i){
-        e.morph('top:'+i*e.getHeight()+'px',{duration:0.4}); 
-      });
+      divObjs = $('#scripty_morph_demo').find('div');
+      for( i=0; i < divObjs.length; i++ ){
+		divObjs[i].animate( {top: i*divObjs[i].clientHeight+'px'}, 0.4);
+      //.css('top'setTop().each(function(e,i){
+        //e.morph('top:'+i*e.getHeight()+'px',{duration:0.4}); 
+      }
     }
     $('scripty_morph_demo').ready( foo );
     foo();
