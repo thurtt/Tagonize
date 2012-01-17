@@ -21,16 +21,16 @@ function swapInspire(insp){
 <div id="inspiration" class="inspire_widget">
 	<div class="inspire_boilerplate">For </div>
 	<div id="scripty_morph_demo"> 
-		<div onclick="setElement(this); swapInspire($('artist'));">Artists</div> 
-		<div onclick="setElement(this); swapInspire($('developer'));">Developers</div>
-		<div onclick="setElement(this); swapInspire($('musician'));">Musicians</div>
-		<div onclick="setElement(this); swapInspire($('artisan'));">Artisans</div> 
-		<div onclick="setElement(this); swapInspire($('planner'));">Planners</div>
-		<div onclick="setElement(this); swapInspire($('manager'));">Managers</div>
-		<div onclick="setElement(this); swapInspire($('videographer'));">Videographers</div>
-		<div onclick="setElement(this); swapInspire($('muffins'));">Muffins</div>
+		<div onclick="setElement(this); swapInspire($('#artist'));">Artists</div> 
+		<div onclick="setElement(this); swapInspire($('#developer'));">Developers</div>
+		<div onclick="setElement(this); swapInspire($('#musician'));">Musicians</div>
+		<div onclick="setElement(this); swapInspire($('#artisan'));">Artisans</div> 
+		<div onclick="setElement(this); swapInspire($('#planner'));">Planners</div>
+		<div onclick="setElement(this); swapInspire($('#manager'));">Managers</div>
+		<div onclick="setElement(this); swapInspire($('#videographer'));">Videographers</div>
+		<div onclick="setElement(this); swapInspire($('#muffins'));">Muffins</div>
 	</div> 
-	<div class="content" id="developer" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="developer" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/artist_screen.png"%>
 			<br/>
@@ -41,7 +41,7 @@ function swapInspire(insp){
 			</ul>
 		</div>
 	</div>
-	<div class="content" id="artist" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="artist" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -52,7 +52,7 @@ function swapInspire(insp){
 			
 		</div>
 	</div>
-	<div class="content" id="artisan" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="artisan" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -64,7 +64,7 @@ function swapInspire(insp){
 			
 		</div>
 	</div>
-	<div class="content" id="planner" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="planner" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -76,7 +76,7 @@ function swapInspire(insp){
 			</ul>
 		</div>
 	</div>	
-	<div class="content" id="manager" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="manager" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -89,7 +89,7 @@ function swapInspire(insp){
 		</div>
 	</div>
 	
-	<div class="content" id="videographer" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="videographer" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -102,7 +102,7 @@ function swapInspire(insp){
 		</div>
 	</div>	
 	
-	<div class="content" id="musician" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="musician" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
@@ -115,7 +115,7 @@ function swapInspire(insp){
 		</div>
 	</div>	
 		
-	<div class="content" id="muffins" style="opacity: 0.0;filter:alpha(opacity=0);">
+	<div class="content" id="muffins" style="display:none">
 		<div class="centered">
 			<%=image_tag "screens/muffins.png"%>
 			<br/>
@@ -126,7 +126,7 @@ function swapInspire(insp){
 
 <script>
 
-swapInspire($('artist'));
+swapInspire($('#artist'));
 
   Array.prototype.setTop = function(){
       if (view_element != null){
@@ -143,11 +143,12 @@ swapInspire($('artist'));
   (function(){
     function foo(){
       divObjs = $('#scripty_morph_demo').find('div');
+      divObjs = jQuery.makeArray(divObjs).setTop();
       for( i=0; i < divObjs.length; i++ ){
 		$(divObjs[i]).animate( {top: i*divObjs[i].clientHeight+'px'}, 400);
       }
     }
-    $('scripty_morph_demo').ready( foo );
+    $('#scripty_morph_demo').click( foo );
     foo();
   })();
 </script>
