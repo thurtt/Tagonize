@@ -1,20 +1,5 @@
 <script>
-var view_element = null;
-function setElement( element ){
-	view_element = element;
-}
 
-var show_inspiration = null;
-function swapInspire(insp){
-	if (insp == show_inspiration)
-		return;
-	if (show_inspiration != null){
-		show_inspiration.fadeOut( 400 ); //style.display = 'none';
-	}
-	show_inspiration = insp;
-
-	show_inspiration.fadeIn( 400 ); //style.display = '';
-}
 </script>
 
 
@@ -32,7 +17,7 @@ function swapInspire(insp){
 	</div> 
 	<div class="content" id="developer" style="display:none">
 		<div class="centered">
-			<%=image_tag "screens/artist_screen.png"%>
+			<%=image_tag "screens/developer_screen.png"%>
 			<br/>
 			<ul>
 				<li>Agile effort tracking for agile developers.</li>
@@ -43,7 +28,7 @@ function swapInspire(insp){
 	</div>
 	<div class="content" id="artist" style="display:none">
 		<div class="centered">
-			<%=image_tag "screens/developer_screen.png"%>
+			<%=image_tag "screens/artist_screen.png"%>
 			<br/>
 			<ul>
 				<li>Spend more time being creative.</li>
@@ -54,7 +39,7 @@ function swapInspire(insp){
 	</div>
 	<div class="content" id="artisan" style="display:none">
 		<div class="centered">
-			<%=image_tag "screens/developer_screen.png"%>
+			<%=image_tag "screens/artist_screen.png"%>
 			<br/>
 			<ul>
 				<li>Track exactly how long your craft takes.</li>
@@ -125,21 +110,7 @@ function swapInspire(insp){
 </div>
 
 <script>
-
-swapInspire($('#artist'));
-
-  Array.prototype.setTop = function(){
-      if (view_element != null){
-      	var oldlist = this;
-      	var newlist = [view_element];
-      	for (var i=0; i<oldlist.length; i++){
-      		if ( oldlist[i] != view_element ){ newlist.push( oldlist[i] );}
-      	}
-      	return newlist;
-      }
-      else{ return this;}
-  };
- 
+  swapInspire($('#artist'));
   (function(){
     function foo(){
       divObjs = $('#scripty_morph_demo').find('div');
