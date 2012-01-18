@@ -1,5 +1,5 @@
-function MoveTo( id, x, y ){
-    $(id).animate( { left: x, top: y }, 'swing' );
+function MoveTo( id, x, y, func ){
+    $(id).animate( { left: x, top: y }, 'swing', func );
 }
 
 function ScrollToDiv( id ){

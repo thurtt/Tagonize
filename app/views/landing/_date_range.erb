@@ -11,6 +11,6 @@
 </div>
 
 <script>
-    createCalendarSet("date_box", new Date( parseFloat( '<%= session[:workingDate].to_i * 1000 %>' ) ), "day_square_");
-    Element.show( 'working_<%= session[:workingDate].to_i * 1000 %>' );
+    createCalendarSet("#date_box", new Date( parseFloat( '<%= session[:workingDate].to_i * 1000 %>' ) ), "#day_square_");
+    $( '#working_<%= session[:workingDate].to_i * 1000 %>' ).show();
 </script>

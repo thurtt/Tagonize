@@ -3,6 +3,8 @@
 // This file is automatically included by javascript_include_tag :defaults
 //= require jquery
 //= require jquery_ujs
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 
 var winW = 630, winH = 460;

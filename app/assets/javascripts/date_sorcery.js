@@ -15,8 +15,8 @@ function scroll( spaces ) {
     workingDate = new Date( parseInt( workingDate.getTime() ) + ( -objCount * ONE_DAY )  );
     moveEverything( objCount );
     
-    Element.show( 'working_' + workingDate.getTime().toString() );    
-    new Ajax.Updater(
+    $( '#working_' + workingDate.getTime().toString() ).show();    
+    /*new Ajax.Updater(
                      'content',
                      '/time_entries/set_date',
                      {
@@ -27,7 +27,8 @@ function scroll( spaces ) {
                         onException: postLoad,
                         onFailure: postLoad
                      }
-                    );
+                    );*/
+    $('#content').get( 'time_entries/set_date', { date: workingDate.toString() }, postLoad );
 }
 
 function createCalendarSet( parent, date, id ){
@@ -46,10 +47,9 @@ function createCalendarSet( parent, date, id ){
     highlightWorkingDate( true );
     
     // center everything
-    xPos = ( $('date_box').getWidth() / 2 ) - ( ( SPACING * 9 )/ 2 );
-    
+    xPos = ( $('date_box').width() / 2 ) - ( ( SPACING * 9 )/ 2 );
     for( i = 0; i < 9; i++ ){
-        new Effect.Move( calendarObjects[i].id, { x: xPos + padding, y:0, position:'relative'} );
+        moveDateBox( calendarObjects[i], xPos, null );
     }
 }
 
@@ -67,9 +67,9 @@ function addLeft() {
         stamp = parseInt( head );
         calObj = createCalendarObject( stamp - ONE_DAY );
         
-        pos = $( head ).positionedOffset().toArray();
+        pos = $( head ).position();
         
-        calObj.style.left = ( pos[0] - SPACING ).toString() + "px";
+        calObj.style.left = ( pos - SPACING ).toString() + "px";
         calendarObjects.unshift( calObj );
     }
 }
@@ -78,7 +78,7 @@ function removeRight(){
     for( i = 0; i < Math.abs( objCount ); i++ ){
         // remove from the tail
         tailIndex = calendarObjects.length - 1;
-        $(dateParent).removeChild( calendarObjects[tailIndex]);
+        $(dateParent).remove( calendarObjects[tailIndex]);
     
         // clean up the reference list
         calendarObjects.pop();
@@ -90,16 +90,16 @@ function addRight() {
     for ( i = 0; i < Math.abs( objCount ); i++ ) {
         // some info about the tail of the list
         tailIndex = calendarObjects.length - 1;
-        tail = calendarObjects[tailIndex].id;
+        tail = "#" + calendarObjects[tailIndex].id;
         stamp = parseInt( tail );
         calObj = createCalendarObject( stamp + ONE_DAY );
     
         // get the left value for the last item before we move it
         // that will be the left value for the new item.
-        pos = $( tail ).positionedOffset().toArray();
+        pos = $( tail ).position().left;
        
         // set the x position for our new beeeotch
-        calObj.style.left = ( pos[0] + SPACING ).toString() + "px";
+        calObj.style.left = ( pos + SPACING ).toString() + "px";
         calendarObjects.push( calObj );
     }
 }
@@ -108,7 +108,7 @@ function addRight() {
 function removeLeft() {
     for( i = 0; i < Math.abs( objCount ); i++ ){
         // remove from the head
-        $(dateParent).removeChild( calendarObjects[0] );
+        $(dateParent).remove( calendarObjects[0] );
           
         // clean up the reference list
         calendarObjects.shift();       
@@ -116,22 +116,28 @@ function removeLeft() {
 }
 
 function getDistance( obj1, obj2 ){
-    pos1 = $( obj1 ).positionedOffset().toArray();
-    pos2 = $( obj2 ).positionedOffset().toArray();
+    pos1 = obj1.position();
+    pos2 = obj2.position();
     
-    return parseInt( ( pos1[0] - pos2[0] ) / SPACING );
+    return parseInt( ( pos1.left - pos2.left ) / SPACING );
 }
 
 function moveEverything( objCount ) {
     xPos = SPACING * objCount;  
-    for( calCounter = 0; calCounter < calendarObjects.length; calCounter++ ){
+    for( calCounter = 0; calCounter < calendarObjects.length; calCounter++ ){     
+        func = null;
         if ( calCounter == calendarObjects.length - 1 ) {
-            
-            new Effect.Move( calendarObjects[calCounter].id, { x: xPos, y:0, position:'relative', afterFinish: postMove } );
-        } else {
-            new Effect.Move( calendarObjects[calCounter].id, { x: xPos, y:0, position:'relative'} );
+            func = postMove;
         }
+        moveDateBox( calendarObjects[calCounter], xPos, func);
     }  
+}
+
+function moveDateBox( id, pixels, func ){
+    // pixels can be negative to move left
+    curPos = $(id).position().left;
+    xPix = curPos + pixels;
+    $(calendarObjects[i]).animate( { left: xPix, top: 0 }, 100, 'linear', func );
 }
 
 function postMove(){
@@ -141,7 +147,7 @@ function postMove(){
 }
 
 function postLoad(){
-    Element.hide( 'working_' + workingDate.getTime().toString() );   
+    $( '#working_' + workingDate.getTime().toString() ).hide();   
 }
 
 function createCalendarObject( stamp ){
@@ -178,24 +184,24 @@ function createCalendarObject( stamp ){
     calObj.appendChild( bottomDiv );
     calObj.appendChild( workingDiv );
     
-    $(dateParent).appendChild( calObj );
+    $(dateParent).append( calObj );
     calObj.setAttribute( 'onclick', "setWorkingDate(this)")
     return calObj;
 }
 
 function highlightWorkingDate( enableHighlight ){
     currentDate = workingDate.getTime().toString();
-    header = 'month_' + currentDate;
+    header = '#month_' + currentDate;
     if ( enableHighlight ){ 
         // add higlight to the new element.
-        $(header).removeClassName('month_normal');
-        $(currentDate).removeClassName('day_square_normal');
-        $(header).addClassName('month_selected');
-        $(currentDate).addClassName('day_square_selected');
+        $(header).removeClass('month_normal');
+        $(currentDate).removeClass('day_square_normal');
+        $(header).addClass('month_selected');
+        $(currentDate).addClass('day_square_selected');
     } else {
-        $(header).removeClassName('month_selected');
-        $(currentDate).removeClassName('day_square_selected');
-        $(header).addClassName('month_normal');
-        $(currentDate).addClassName('day_square_normal');
+        $(header).removeClass('month_selected');
+        $(currentDate).removeClass('day_square_selected');
+        $(header).addClass('month_normal');
+        $(currentDate).addClass('day_square_normal');
     }
 }
