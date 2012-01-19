@@ -47,15 +47,15 @@ function createCalendarSet( parent, date, id ){
     highlightWorkingDate( true );
     
     // center everything
-    xPos = ( $('date_box').width() / 2 ) - ( ( SPACING * 9 )/ 2 );
+    xPos = (  $('#date_box').width() / 2 ) - ( ( SPACING * 9 )/ 2 );
     for( i = 0; i < 9; i++ ){
         moveDateBox( calendarObjects[i], xPos, null );
     }
 }
 
 function setWorkingDate( me ){
-    currentDate = workingDate.getTime().toString();
-    newDate = me.id;  
+    currentDate = $( "#" + workingDate.getTime().toString() );
+    newDate = $( "#" + me.id );  
     distance = getDistance( currentDate, newDate );
     scroll( distance, false );   
 }
@@ -63,11 +63,11 @@ function setWorkingDate( me ){
 function addLeft() {
     for( i = 0; i < Math.abs( objCount ); i++ ){
         // some info about the head of the list
-        head = calendarObjects[0].id;
-        stamp = parseInt( head );
+        head = calendarObjects[0];
+        stamp = parseInt( head.id );
         calObj = createCalendarObject( stamp - ONE_DAY );
         
-        pos = $( head ).position();
+        pos = $( head ).position().left;
         
         calObj.style.left = ( pos - SPACING ).toString() + "px";
         calendarObjects.unshift( calObj );
@@ -90,8 +90,8 @@ function addRight() {
     for ( i = 0; i < Math.abs( objCount ); i++ ) {
         // some info about the tail of the list
         tailIndex = calendarObjects.length - 1;
-        tail = "#" + calendarObjects[tailIndex].id;
-        stamp = parseInt( tail );
+        tail = calendarObjects[tailIndex];
+        stamp = parseInt( tail.id );
         calObj = createCalendarObject( stamp + ONE_DAY );
     
         // get the left value for the last item before we move it
@@ -116,10 +116,10 @@ function removeLeft() {
 }
 
 function getDistance( obj1, obj2 ){
-    pos1 = obj1.position();
-    pos2 = obj2.position();
+    pos1 = obj1.position().left;
+    pos2 = obj2.position().left;
     
-    return parseInt( ( pos1.left - pos2.left ) / SPACING );
+    return parseInt( ( pos1 - pos2 ) / SPACING );
 }
 
 function moveEverything( objCount ) {
@@ -133,11 +133,11 @@ function moveEverything( objCount ) {
     }  
 }
 
-function moveDateBox( id, pixels, func ){
+function moveDateBox( id, pixels, moves, func ){
     // pixels can be negative to move left
     curPos = $(id).position().left;
     xPix = curPos + pixels;
-    $(calendarObjects[i]).animate( { left: xPix, top: 0 }, 100, 'linear', func );
+    $(id).animate( { left: xPix, top: 0 }, 800, 'swing', func );
 }
 
 function postMove(){
