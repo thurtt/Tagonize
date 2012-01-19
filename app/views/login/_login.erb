@@ -15,7 +15,7 @@
 <br /><br />
 <br /><br />
 	
-	<%= form_tag(:url=>{:controller=>:login, :action=>:signup}, :remote=>true)%>
+	<%= form_tag({:controller=>:login, :action=>:signup}, :remote=>true) do%>
 	<input type="hidden" id="time_zone" name="tz_offset">
 	<table>
 		<tr>
@@ -42,7 +42,7 @@
 			<td><div class="form_submit"><%=submit_tag "Sign Up"%></div></td>
 		</tr>
 	</table>
-	</form>
+	<% end %>
 </div>
 </div>
 

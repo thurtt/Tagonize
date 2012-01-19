@@ -6,8 +6,8 @@
 			</div>
 		</td>
 		<td>
-			<div id="edit_profile"><%= in_place_editor_field :user, 'name', {}, :url=>{:controller=>'profile', :action=>'set_user_name', :id=>@user.id} %></div>
-			<div id="edit_location"><%= in_place_editor_field :user, 'location', {}, :url=>{:controller=>'profile', :action=>'set_user_location', :id=>@user.id} %></div>
+			<div id="edit_profile"><%= best_in_place :user, :name %></div>
+			<div id="edit_location"><%= best_in_place :user, :location %></div>
 		</td>
 	</tr>
 </table>

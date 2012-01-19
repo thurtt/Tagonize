@@ -47,6 +47,8 @@ class LoginController < ApplicationController
 	
 	def signup
 		
+		flash[:notice] = "Sign-up failed."
+		partial = "login"
 		# setup the timezone
 		# I think this works...
 		Time.zone = ( params[:tz_offset].to_i / 60 )
@@ -54,73 +56,77 @@ class LoginController < ApplicationController
 		# GUARD: no data
 		if params[:email] == "" or params[:password] == ""
 			flash[:notice] = "Sign-up failed. Give us more info than that!"
-			render :partial=>"login" and return
-		end
 		
 		#
 		# GUARD: logging in instead of creating. just go with it.
-		if authenticate() == true
+		elsif authenticate() == true
 		
 			if session[:landing] == nil || session[:landing] == ""
-				render :partial=>"profile/profile" and return
+				partial = "profile/profile"
 			else
-				redirect_to session[:landing] and return
+				respond_to{ |format| format.html{ redirect_to session[:landing]}}
 			end
-		end
-			
 		
 		#
 		# GUARD: trying to use an existing email as your username
-		if params[:email].include?("@")
+		elsif params[:email].include?("@")
 			flash[:notice] = "If you're trying to create an account, use your name. We'll ask for your email later."
-			render :partial=>"login" and return
-		end
-		
+			partial = "login"		
 		#
 		# BUSINESS: We create the user; Redirect to verify password.
-		render :partial=>"create_user" and return
+		else
+
+			partial = "create_user"
+		end
 		
-		flash[:notice] = "Sign-up failed."
-		render :partial=>"login" and return
+		# Now it's business time, work through the render routine
+		respond_to do |format|
+			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+		end		
 			
 	end
 	
 	def create_user
+		
+		flash[:notice] = "Sign-up failed."
+		partial = "create_user"
+		
 		#
 		# GUARD: no data
 		if params[:email] == "" or params[:password] == "" or params[:password_retype] == ""
 			flash[:notice] = "Give us more info than that!"
-			render :partial=>"login" and return
-		end
-		
+			partial = "login"
 		#
 		# GUARD: mismatch
-		if params[:password_retype] != params[:password]
+		elsif params[:password_retype] != params[:password]
 			flash[:notice] = "Ooops! That password didn't match what you previously gave us."
-			render :partial=>"create_user" and return
-		end
-		
-		
-		#
-		# BIZNAZ: creation
-		user = User.new()
-		user.name = params[:email]
-		user.location = 'Set your location.'
-		user.created_at = Time.now()
-		user.updated_at = Time.now()
-		user.password = User.find_by_sql("select password('#{params[:password]}') as passhash")[0].passhash
-		if user.save
-			if authenticate() == true
-				
-				if session[:landing] == nil || session[:landing] == ""
-					render :partial=>"profile/profile" and return
-				else
-					redirect_to session[:landing] and return
+			partial = "create_user"
+		else
+			#
+			# BIZNAZ: creation
+			user = User.new()
+			user.name = params[:email]
+			user.location = 'Set your location.'
+			user.created_at = Time.now()
+			user.updated_at = Time.now()
+			user.password = User.find_by_sql("select password('#{params[:password]}') as passhash")[0].passhash
+			if user.save
+				if authenticate() == true
+					
+					if session[:landing] == nil || session[:landing] == ""
+						partial = "profile/profile"
+					else
+						respond_to{ |format| format.html{ redirect_to session[:landing] } }
+					end
 				end
 			end
 		end
-		flash[:notice] = "Sign-up failed."
-		render :partial=>"create_user" and return
+		respond_to do |format|
+			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+		end	
+		
 	end
 
 	def logout

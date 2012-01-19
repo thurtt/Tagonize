@@ -2,7 +2,7 @@
 <br /><br />
 <%= render :partial=>"landing/inspire"%>
 <div style="position:absolute; bottom:20px; left:0px; text-align:center; width:100%;">
-	<div style="cursor:pointer;" onclick="Effect.ScrollTo('join_form'); $('login_input').focus();" >
+	<div style="cursor:pointer;" onclick="ScrollToDiv('join_form'); $(#'login_input').focus();" >
 		<%=image_tag "loginsignup.png"%>
 	</div>
 </div>
@@ -24,12 +24,12 @@
 
 <div id="retype_password" class="extra">
 <div>
-	<%= form_remote_tag(:update=>"top_container",:url=>{:controller=>:login, :action=>:create_user})%>
-	<input type="hidden" name="email" value="<%=params[:email]%>">
-	<input type="hidden" name="password" value="<%=params[:password]%>">
-	<div class="signup_field_entry"> <input type="password" name="password_retype" placeholder="Retype Password" required> </div>
-	<div class="form_submit"><%=submit_tag "Sign Up"%></div>
-	</form>
+	<%= form_tag({:controller=>:login, :action=>:create_user}, :remote=>true) do%>
+		<input type="hidden" name="email" value="<%=params[:email]%>">
+		<input type="hidden" name="password" value="<%=params[:password]%>">
+		<div class="signup_field_entry"> <input type="password" name="password_retype" placeholder="Retype Password" required> </div>
+		<div class="form_submit"><%=submit_tag "Sign Up"%></div>
+	<% end %>
 </div>
 </div>
 
