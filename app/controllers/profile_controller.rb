@@ -37,6 +37,10 @@ class ProfileController < ApplicationController
 			end
 		end
 		
+		respond_to do |format|
+			format.html { render :partial=>".js", :locals=>{:partial=>partial} }
+			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+		end
 		render :partial=>"mini_profile"
 	end
 	

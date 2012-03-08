@@ -1,5 +1,4 @@
 /* partial inspire */
-
 var view_element = null;
 function setElement( element ){
 	view_element = element;
@@ -28,4 +27,3 @@ function swapInspire(insp){
       }
       else{ return this;}
   };
- 

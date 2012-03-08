@@ -1,8 +1,8 @@
 class LoginController < ApplicationController
-	
+
 	def index
 	end
-	
+
 	def login
 		if authenticate() == true
 			if session[:landing] == nil || session[:landing] == ""
@@ -12,11 +12,11 @@ class LoginController < ApplicationController
 			end
 		end
 		render :partial=>"login" and return
-		
+
 	end
-	
+
 	def authenticate
-		
+
 		#To let the user use any email address entry to authenticate, do this:
 		# 1. validate existence of email address or user name
 		# 2. get the associated user object(s)
@@ -44,9 +44,9 @@ class LoginController < ApplicationController
 		flash[:notice] = "These credentials don't match anything we have."
 		return false
 	end
-	
+
 	def signup
-		
+
 		flash[:notice] = "Sign-up failed."
 		partial = "login"
 		# setup the timezone
@@ -56,42 +56,42 @@ class LoginController < ApplicationController
 		# GUARD: no data
 		if params[:email] == "" or params[:password] == ""
 			flash[:notice] = "Sign-up failed. Give us more info than that!"
-		
+
 		#
 		# GUARD: logging in instead of creating. just go with it.
 		elsif authenticate() == true
-		
+
 			if session[:landing] == nil || session[:landing] == ""
 				partial = "profile/profile"
 			else
 				respond_to{ |format| format.html{ redirect_to session[:landing]}}
 			end
-		
+
 		#
 		# GUARD: trying to use an existing email as your username
 		elsif params[:email].include?("@")
 			flash[:notice] = "If you're trying to create an account, use your name. We'll ask for your email later."
-			partial = "login"		
+			partial = "login"
 		#
 		# BUSINESS: We create the user; Redirect to verify password.
 		else
 
 			partial = "create_user"
 		end
-		
+
 		# Now it's business time, work through the render routine
 		respond_to do |format|
-			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+			format.html { render :partial=>"partial", :locals=>{:partial=>partial} }
 			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
-		end		
-			
+		end
+
 	end
-	
+
 	def create_user
-		
+
 		flash[:notice] = "Sign-up failed."
 		partial = "create_user"
-		
+
 		#
 		# GUARD: no data
 		if params[:email] == "" or params[:password] == "" or params[:password_retype] == ""
@@ -113,7 +113,7 @@ class LoginController < ApplicationController
 			user.password = User.find_by_sql("select password('#{params[:password]}') as passhash")[0].passhash
 			if user.save
 				if authenticate() == true
-					
+
 					if session[:landing] == nil || session[:landing] == ""
 						partial = "profile/profile"
 					else
@@ -125,8 +125,8 @@ class LoginController < ApplicationController
 		respond_to do |format|
 			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
 			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
-		end	
-		
+		end
+
 	end
 
 	def logout

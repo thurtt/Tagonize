@@ -1,8 +1,8 @@
 development:
   adapter: mysql2
-  database: tagonize
-  username: tagonizedb
-  password: tagonizedb
+  database: p424585r_timetrack
+  username: p424585r_trkuser
+  password: JkL%6&ZxC
   host: 127.0.0.1
 
 # Warning: The database defined as 'test' will be erased and
