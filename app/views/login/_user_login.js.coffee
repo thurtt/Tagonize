@@ -1,1 +1,0 @@
-$('div#top_container').html("<%=raw render(:partial=>partial, :sanitize=>false).gsub('"', '\"').gsub("\n", "")%>");
