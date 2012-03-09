@@ -4,14 +4,19 @@ class LoginController < ApplicationController
 	end
 
 	def login
+		profile = login
 		if authenticate() == true
 			if session[:landing] == nil || session[:landing] == ""
-				render :partial=>"profile/profile" and return
+
+				parital = "profile/profile"
 			else
 				redirect_to session[:landing] and return
 			end
 		end
-		render :partial=>"login" and return
+		respond_to do |format|
+			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+		end
 
 	end
 
@@ -81,7 +86,7 @@ class LoginController < ApplicationController
 
 		# Now it's business time, work through the render routine
 		respond_to do |format|
-			format.html { render :partial=>"partial", :locals=>{:partial=>partial} }
+			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
 			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
 		end
 

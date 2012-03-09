@@ -1,0 +1,32 @@
+$('div#top_container').html("<%=raw render(:partial=>partial, :sanitize=>false).gsub('"', '\"').gsub("\n", "")%>");
+
+$(document).ready( function(){
+    flipped = false;
+    <%if (@user.emails.length > 0) && (@user.email != nil)%>
+	    setupScene(2);
+    <%else%>
+	    flipped = true;
+	    setupScene(1);
+    <%end%>
+    updateTitle("Profile");
+    $('#thebod').style.overflow = "auto";
+    ScrollToDiv('thebod');
+    $.get( '<%= url_for(:controller=>"time_entries", :action=>"index") %>', function( data ){
+	    $('#content').html( data );
+    });
+    $('#thebod').style.overflowX = "hidden";
+
+    $('#done_button input').click( function(){
+	if (flipped){
+	    setupScene(2);
+	    flipped = false;
+	}
+    });
+
+    $('#profile_container').click( function(){
+	if (!flipped){
+	    setupScene(3);
+	    flipped = true;
+	}
+    });
+});

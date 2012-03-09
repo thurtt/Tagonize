@@ -28,3 +28,19 @@ You have to link an email address to begin.
 		<%=submit_tag "Link Email"%>
 	<%end%>
 </div>
+
+<script>
+	email_count = <%=@user.emails.length%>;
+
+	<%if @new_email%>
+	    history.go(0);
+	<%end%>
+
+	<%if (@user.emails.length > 0) && (@user.email != nil)%>
+	    $('#done_button').style.display = '';
+	    if (current_scene == 3)
+		    resetScene();
+	<%else%>
+		setupScene(1);
+	<%end%>
+</script>
