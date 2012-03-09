@@ -86,8 +86,7 @@ class LoginController < ApplicationController
 
 		# Now it's business time, work through the render routine
 		respond_to do |format|
-			format.html { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
-			format.js { render :partial=>"user_login.js", :locals=>{:partial=>partial} }
+			format.js { render :partial=>"signup.js", :locals=>{:partial=>partial} }
 		end
 
 	end

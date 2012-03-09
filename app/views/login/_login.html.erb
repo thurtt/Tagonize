@@ -45,3 +45,10 @@
 	<% end %>
 </div>
 </div>
+
+<script>	
+	updateTitle("Signup!");
+	setupScene(1);
+	document.getElementById('thebod').style.overflow = "hidden";
+	$('time_zone').value = (-(new Date().getTimezoneOffset())).toString();
+</script>
