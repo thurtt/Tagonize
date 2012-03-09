@@ -19,3 +19,22 @@
 </div>
 
 <div id="logout"><%=link_to "[Logout]", :controller=>"login", :action=>"logout"%></div>
+
+<script>	
+	flipped = false;
+	<%if (@user.emails.length > 0) && (@user.email != nil)%>
+		setupScene(2);
+	<%else%>
+		flipped = true;
+		setupScene(1);
+	<%end%>
+	
+	/*$.get( '<%= url_for(:controller=>"time_entries", :action=>"index") %>', function( data ){
+		$('#content').html( data );
+	});*/
+	
+	$('#thebod').style.overflowX = "hidden";
+	updateTitle("Profile");
+	$('#thebod').style.overflow = "auto";
+	ScrollToDiv('thebod');
+</script>
