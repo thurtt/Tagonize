@@ -1,3 +1,27 @@
+
+$(document).ready( function(){
+	// date controls
+	$('#move_left').click( function(){scroll(7)});
+	$('#move_right').click( function(){scroll(-7)});
+	createCalendarSet("#date_box", new Date( parseFloat( '<%= session[:workingDate].to_i * 1000 %>' ) ), "#day_square_");
+	$( '#working_<%= session[:workingDate].to_i * 1000 %>' ).show();
+
+	// Inspire widget
+	swapInspire($('#artist'));
+	(function(){
+	  function foo(){
+	    divObjs = $('#scripty_morph_demo').find('div');
+	    divObjs = jQuery.makeArray(divObjs).setTop();
+	    for( i=0; i < divObjs.length; i++ ){
+		      $(divObjs[i]).animate( {top: i*divObjs[i].clientHeight+'px'}, 400);
+	    }
+	  }
+	  $('#scripty_morph_demo').click( foo );
+	  foo();
+	})();
+});
+
+
 /* partial inspire */
 var view_element = null;
 function setElement( element ){

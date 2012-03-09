@@ -103,18 +103,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-  swapInspire($('#artist'));
-  (function(){
-    function foo(){
-      divObjs = $('#scripty_morph_demo').find('div');
-      divObjs = jQuery.makeArray(divObjs).setTop();
-      for( i=0; i < divObjs.length; i++ ){
-		$(divObjs[i]).animate( {top: i*divObjs[i].clientHeight+'px'}, 400);
-      }
-    }
-    $('#scripty_morph_demo').click( foo );
-    foo();
-  })();
-</script>
